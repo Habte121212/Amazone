@@ -1,0 +1,253 @@
+.countryModalOverlay {
+  position: fixed;
+  top: 99px;
+  left: 0;
+  right: 0;
+  height: calc(100vh - 99px);
+  background-color: #ffffff;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.countryModal {
+  background-color: #ffffff;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.18);
+  padding: 32px 28px 18px 28px;
+
+  width: 100%;
+  color: #232f3e;
+  position: relative;
+}
+.countryModal h2 {
+  font-size: 22px;
+  padding: 16px 0;
+}
+.countryModalSub {
+  font-size: 15px;
+  margin-bottom: 18px;
+}
+.countryModalList {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 0;
+  max-height: 180px;
+  overflow-y: auto;
+  border: none !important; /* Ensure no border on the list itself */
+  box-shadow: none !important;
+  background: transparent;
+}
+.countryModalOption {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer !important;
+  font-size: 14px;
+  border: none !important;
+  background: #fff;
+  transition: background 0.2s, color 0.2s;
+}
+.countryModalOption.selected {
+  background: #f3f3f3;
+  border: none !important;
+  font-weight: bold;
+}
+.countryModalOption:hover {
+  background: #f7f7f7;
+  border: none !important;
+  color: #c45500;
+}
+.countryModalDropdownWrapper {
+  position: relative;
+  width: 240px;
+  margin: 0 auto 18px auto;
+}
+
+.countryModalDropdown {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  width: 100%;
+  min-width: 180px;
+  max-width: 320px;
+  background: #fff;
+  border: 1px solid #d5d9d9;
+  border-radius: 4px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 100;
+  animation: fadeSlideIn 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 0;
+}
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.countryModalSearch {
+  width: 100%;
+  padding: 6px 10px;
+  margin: 8px 0 4px 0;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.countryModalList {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 0;
+  max-height: 180px;
+  overflow-y: auto;
+  cursor: pointer !important;
+  border: none !important; 
+  box-shadow: none !important;
+  background: transparent;
+}
+.countryModalOption {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer !important;
+  font-size: 14px;
+  border: none !important;
+  background: #fff;
+  transition: background 0.2s, color 0.2s;
+}
+.countryModalOption.selected {
+  background: #f3f3f3;
+  border: none !important;
+  font-weight: bold;
+}
+.countryModalOption:hover {
+  background: #f7f7f7;
+  border: none !important;
+  color: #c45500;
+}
+.countryModalOption img {
+  border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+.selectedMark {
+  color: #f90;
+  font-size: 18px;
+  margin-left: auto;
+}
+.countryModalNote {
+  font-size: 18px;
+  padding: 16px 0;
+  color: #555;
+}
+.horizontal {
+  border: none;
+  border-top: 2px solid #d5d9d9;
+  margin: 16px 0;
+}
+.countryModalActions {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.countryModalActions button {
+  font-size: 15px;
+  font-weight: bold;
+  border-radius: 4px;
+  padding: 7px 18px;
+  margin-bottom: 6rem;
+  cursor: pointer;
+  transition: background 0.18s, border 0.18s, color 0.18s, box-shadow 0.18s;
+  outline: none;
+}
+.countryModalCancel {
+  background: #fff;
+  border: 1px solid #888;
+  color: #232f3e;
+}
+.countryModalCancel:hover,
+.countryModalCancel:focus {
+  background: #f3f3f3;
+  border-color: #c45500;
+  color: #c45500;
+  box-shadow: 0 0 0 2px #ffd81455;
+}
+.horizontalLine {
+  border: none;
+  border-top: 1px solid #ddd;
+  padding: 30px 0;
+}
+.countryModalGo {
+  background: #ffd814;
+  border: 1px solid #fcd200;
+  color: #232f3e;
+}
+.countryModalGo:hover,
+.countryModalGo:focus {
+  background: #f7ca00;
+  border-color: #c45500;
+  color: #c45500;
+  box-shadow: 0 0 0 2px #ffd81455;
+}
+.countryModalSignin {
+  text-align: center;
+  font-size: 14px;
+}
+.countryModalSignIn {
+  background: #f0c14b;
+  border: 1px solid #a88734;
+  color: #111;
+  border-radius: 4px;
+  padding: 6px 18px;
+  margin: 8px 0;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: bold;
+  transition: background 0.18s, border 0.18s, color 0.18s, box-shadow 0.18s;
+}
+.countryModalSignIn:hover,
+.countryModalSignIn:focus {
+  background: #e2b33b;
+  border-color: #c45500;
+  color: #c45500;
+  box-shadow: 0 0 0 2px #ffd81455;
+}
+.countryModalNativeSelect {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  font-size: 15px;
+  padding: 7px 10px;
+  border: 1.5px solid #ddd;
+  border-radius: 4px;
+  background: #fff;
+  color: #232f3e;
+  margin-bottom: 16px;
+  box-sizing: border-box;
+  outline: none;
+  appearance: none;
+  height: auto;
+  max-height: 180px;
+  overflow-y: auto;
+  transition: border-color 0.18s, box-shadow 0.18s;
+}
+.countryModalNativeSelect:focus {
+  border-color: #f90;
+  box-shadow: 0 0 0 2px #ffd81455;
+}
+.countryModalNativeSelect option {
+  padding: 6px 10px;
+  font-size: 15px;
+}
