@@ -1,0 +1,121 @@
+.card_container {
+  width: 300px;
+  min-height: 400px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  margin: 24px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid #e3e6e6;
+  transition: box-shadow 0.18s, transform 0.18s;
+  padding: 0;
+
+  &:hover {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.14);
+    transform: translateY(-2px) scale(1.01);
+    border-color: #ffd814;
+  }
+
+  a {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: #232f3e;
+    min-height: 140px;
+    padding: 0;
+  }
+
+  img {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    margin: 12px 0 0 0;
+    background: #fff;
+    border-radius: 4px;
+    border: 1px solid #f3f3f3;
+    box-shadow: none;
+    display: block;
+    padding: 0;
+  }
+
+  h3 {
+    font-size: 1.12rem;
+    font-weight: 700;
+    color: #111;
+    margin: 10px 0 0 0;
+    padding: 0 4px;
+    min-height: 60px;
+    line-height: 1.35;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    line-clamp: 3;
+  }
+
+  .rating {
+    display: flex;
+    align-items: center;
+    padding: 10px 0 0 12px;
+    gap: 4px;
+    margin-bottom: 4px;
+  }
+
+  .price {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #b12704;
+    margin: 0 40px 0 0; 
+    padding-bottom: 8px;
+    display: block;
+    text-align: right;
+    align-self: flex-end;
+  }
+
+  .button {
+    display: none;
+    padding: 7px 0;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    background-color: var(--primary-color);
+    width: 100%;
+    margin: 12px 0 0 0;
+    border-radius: 20px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    font-size: 1rem;
+    color: #232f3e;
+    letter-spacing: 0.01em;
+    transition: background 0.18s, color 0.18s;
+  }
+  &:hover .button {
+    display: block;
+  }
+  .button:hover {
+    background-color: var(--primary-shade);
+    color: #fff;
+  }
+}
+
+.product_container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  max-width: 1400px;
+  margin: 60px auto 60px auto;
+  gap: 40px 32px;
+  justify-items: center;
+}
+
+.product_container section {
+  margin: 0 auto;
+}
