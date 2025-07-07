@@ -7,6 +7,7 @@ import './header.scss'
 import CountryModal from '../countrymodal/CountryModal'
 import AccountDropdown from '../accountdropdown/AccountDropdown'
 import Logo from './Logo'
+import { useNavigate, Link } from 'react-router-dom'
 
 // Reusable SearchInput that adapts width to the selected category
 const SearchInput = () => (
@@ -19,6 +20,7 @@ const SearchInput = () => (
 )
 
 const Header = () => {
+  const navigate = useNavigate()
   const [category, setCategory] = React.useState('all')
   const [langDropdown, setLangDropdown] = React.useState(false)
   const [showCountryPanel, setShowCountryPanel] = React.useState(false)
@@ -154,7 +156,7 @@ const Header = () => {
         <div className="headerTop">
           <div className="headerLogo">
             {/* header logo amazone */}
-            <Logo onClick={() => (window.location.href = '/')} />
+            <Logo onClick={() => navigate('/')} />
           </div>
           <div className="headerLocation">
             <span className="locationIcon">
@@ -354,6 +356,7 @@ const Header = () => {
             tabIndex={0}
             aria-haspopup="menu"
             aria-expanded={accountDropdown}
+            onClick={() => navigate('/auth')}
           >
             <span className="smallText">Hello, sign in</span>
             <span className="boldText">
@@ -362,42 +365,40 @@ const Header = () => {
             <AccountDropdown
               open={accountDropdown}
               onClose={() => setAccountDropdown(false)}
-              onSignIn={() =>
-                window.open('https://www.amazon.com/ap/signin', '_blank')
-              }
+              onSignIn={() => navigate('/auth')}
             />
           </div>
-          <div className="headerOrders">
+          <div className="headerOrders" onClick={() => navigate('/order')}>
             <span className="smallText">Returns</span>
             <span className="boldText">& Orders</span>
           </div>
-          <div className="headerCart">
+          <div className="headerCart" onClick={() => navigate('/cart')}>
             <ShoppingCartIcon />
             <span className="cartCount">0</span>
             <span className="cartText">Cart</span>
           </div>
         </div>
         <nav className="headerNav">
-          <a href="#" className="navLink">
+          <Link to="/" className="navLink">
             {' '}
             <MenuOutlinedIcon />
             All
-          </a>
-          <a href="#" className="navLink">
+          </Link>
+          <Link to="/deals" className="navLink">
             Today's Deals
-          </a>
-          <a href="#" className="navLink">
+          </Link>
+          <Link to="/customer-service" className="navLink">
             Customer Service
-          </a>
-          <a href="#" className="navLink">
+          </Link>
+          <Link to="/registry" className="navLink">
             Registry
-          </a>
-          <a href="#" className="navLink">
+          </Link>
+          <Link to="/gift-cards" className="navLink">
             Gift Cards
-          </a>
-          <a href="#" className="navLink">
+          </Link>
+          <Link to="/sell" className="navLink">
             Sell
-          </a>
+          </Link>
         </nav>
       </header>
       <CountryModal

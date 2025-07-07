@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import './AccountDropdown.scss'
+import { Link } from 'react-router-dom'
 
 const AccountDropdown = ({ open, onClose, onSignIn }) => {
   if (!open) return null
@@ -34,22 +35,22 @@ const AccountDropdown = ({ open, onClose, onSignIn }) => {
       <div className="accountDropdownColumns">
         <div className="accountDropdownSection">
           <div className="accountDropdownSectionTitle">Your Lists</div>
-          <a href="#">Create a List</a>
-          <a href="#">Find a List or Registry</a>
+          <Link to="/lists">Create a List</Link>
+          <Link to="/registry">Find a List or Registry</Link>
         </div>
         <div className="accountDropdownSection">
           <div className="accountDropdownSectionTitle">Your Account</div>
-          <a href="#">Account</a>
-          <a href="#">Orders</a>
-          <a href="#">Recommendations</a>
-          <a href="#">Browsing History</a>
-          <a href="#">Watchlist</a>
-          <a href="#">Video Purchases & Rentals</a>
-          <a href="#">Kindle Unlimited</a>
-          <a href="#">Content & Devices</a>
-          <a href="#">Subscribe & Save Items</a>
-          <a href="#">Memberships & Subscriptions</a>
-          <a href="#">Music Library</a>
+          <Link to="/account">Account</Link>
+          <Link to="/order">Orders</Link>
+          <Link to="/recommendations">Recommendations</Link>
+          <Link to="/history">Browsing History</Link>
+          <Link to="/watchlist">Watchlist</Link>
+          <Link to="/video-purchases">Video Purchases & Rentals</Link>
+          <Link to="/kindle-unlimited">Kindle Unlimited</Link>
+          <Link to="/content-devices">Content & Devices</Link>
+          <Link to="/subscribe-save">Subscribe & Save Items</Link>
+          <Link to="/subscriptions">Memberships & Subscriptions</Link>
+          <Link to="/music-library">Music Library</Link>
         </div>
       </div>
     </div>
