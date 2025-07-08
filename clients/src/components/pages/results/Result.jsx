@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import { productUrl } from '../../../api/endPoints'
 import ProductCard from '../../products/ProductCard'
+import Loder from '../../../loder/Loder'
 
 const Result = () => {
   const { categoryName } = useParams()
@@ -31,7 +32,7 @@ const Result = () => {
         <p style={{ padding: '30px' }}>Category / {categoryName}</p>
         <hr />
         {loading ? (
-          <div style={{ padding: '30px', textAlign: 'center' }}>Loading...</div>
+          <Loder />
         ) : (
           <div className="product_container">
             {category?.map((product) => (
