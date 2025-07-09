@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useContext, useEffect, useRef } from 'react'
 import SearchIcon from '@mui/icons-material/Search'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
@@ -8,6 +8,7 @@ import CountryModal from '../countrymodal/CountryModal'
 import AccountDropdown from '../accountdropdown/AccountDropdown'
 import Logo from './Logo'
 import { useNavigate, Link } from 'react-router-dom'
+import { DataContext } from '../DataProvider/DataProvider'
 
 // Reusable SearchInput that adapts width to the selected category
 const SearchInput = () => (
@@ -20,6 +21,10 @@ const SearchInput = () => (
 )
 
 const Header = () => {
+  const { state, dispatch } = useContext(DataContext)
+  const { cart } = state
+  console.log(cart.length)
+
   const navigate = useNavigate()
   const [category, setCategory] = React.useState('all')
   const [langDropdown, setLangDropdown] = React.useState(false)
@@ -374,7 +379,7 @@ const Header = () => {
           </div>
           <div className="headerCart" onClick={() => navigate('/cart')}>
             <ShoppingCartIcon />
-            <span className="cartCount">0</span>
+            <span className="cartCount">{cart.length}</span>
             <span className="cartText">Cart</span>
           </div>
         </div>
