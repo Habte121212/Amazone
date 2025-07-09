@@ -28,8 +28,8 @@ const Product = () => {
 
   return (
     <section className="product_container">
-      {products.map((singleProduct) => {
-        return <ProductCard product={singleProduct} key={singleProduct.id} />
+      {products?.map((singleProduct) => {
+        return <ProductCard product={singleProduct} key={singleProduct.id} renderDesc={false} renderAdd={true} />
       })}
     </section>
   )

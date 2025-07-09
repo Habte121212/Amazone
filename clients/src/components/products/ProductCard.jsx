@@ -6,7 +6,17 @@ import { Link } from 'react-router-dom'
 import { DataContext } from '../DataProvider/DataProvider'
 import { Type } from '../../utilty/Action.type'
 
-const ProductCard = ({ product, flex, renderDesc }) => {
+const ProductCard = ({
+  product,
+  flex,
+  renderDesc,
+  renderAdd,
+  showQtyControls,
+  onDecrement,
+  onIncrement,
+  onRemove,
+  quantity,
+}) => {
   const { id, title, image, price, rating, description } = product
 
   const { state, dispatch } = useContext(DataContext)
@@ -36,13 +46,40 @@ const ProductCard = ({ product, flex, renderDesc }) => {
           {/* count*/}
           <small>{rating?.count || 0}</small>
         </div>
-        <div>
-          {/* price */}
-          <CurrencyFormat amount={price || 0} />
+        <div className="product-price-row">
+          <CurrencyFormat amount={price * (quantity || 1)} />
         </div>
-        <button className="button" onClick={addToCart}>
-          Add to Cart
-        </button>
+        {renderAdd && (
+          <button className="button" onClick={addToCart}>
+            Add to Cart
+          </button>
+        )}
+        {showQtyControls && (
+          <div className="cart-qty-controls below">
+            <button
+              className="qty-btn"
+              onClick={onDecrement}
+              aria-label="Decrease quantity"
+            >
+              &#8722;
+            </button>
+            <span className="qty-value">{quantity || 1}</span>
+            <button
+              className="qty-btn"
+              onClick={onIncrement}
+              aria-label="Increase quantity"
+            >
+              &#43;
+            </button>
+            <button
+              className="remove-btn"
+              onClick={onRemove}
+              aria-label="Remove from cart"
+            >
+              Remove
+            </button>
+          </div>
+        )}
       </div>
     </div>
   )
