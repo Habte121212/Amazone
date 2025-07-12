@@ -6,7 +6,7 @@ import './carousel.scss'
 
 const AmazonCarousel = () => {
   return (
-    <div>
+    <div className="carouselContainer">
       <ResponsiveCarousel
         autoPlay={true}
         infiniteLoop={true}

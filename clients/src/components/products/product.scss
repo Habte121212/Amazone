@@ -1,3 +1,5 @@
+@use '../../style.scss' as *;
+
 .card_container {
   width: 300px;
   min-height: 400px;
@@ -97,6 +99,17 @@
     background-color: var(--primary-shade);
     color: #fff;
   }
+
+  @include mobile {
+    align-items: center !important;
+    justify-content: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 98vw !important;
+    min-width: 0 !important;
+    max-width: 340px !important;
+    box-sizing: border-box !important;
+  }
 }
 
 .product_container {
@@ -106,6 +119,16 @@
   margin: 60px auto 60px auto;
   gap: 40px 32px;
   justify-items: center;
+
+  @include mobile {
+    grid-template-columns: 1fr !important;
+    gap: 20px 0 !important;
+    margin: 16px auto !important;
+    place-items: center !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    padding: 0 !important;
+  }
 }
 
 .product_container section {
@@ -298,6 +321,5 @@
 }
 
 .cart-products-list .card_container {
-  margin-bottom: -350px ;
-  
+  margin-bottom: -350px;
 }
