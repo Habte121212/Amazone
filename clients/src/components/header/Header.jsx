@@ -22,8 +22,7 @@ const SearchInput = () => (
 
 const Header = () => {
   const { state, dispatch } = useContext(DataContext)
-  const { cart } = state
-  console.log(cart.length)
+  const { cart, user } = state
 
   const navigate = useNavigate()
   const [category, setCategory] = React.useState('all')
@@ -361,17 +360,42 @@ const Header = () => {
             tabIndex={0}
             aria-haspopup="menu"
             aria-expanded={accountDropdown}
-            onClick={() => navigate('/auth')}
+            onClick={() => {
+              if (!user) navigate('/auth')
+            }}
           >
-            <span className="smallText">Hello, sign in</span>
-            <span className="boldText">
-              Account & Lists <ArrowDropDownIcon fontSize="small" />
-            </span>
-            <AccountDropdown
-              open={accountDropdown}
-              onClose={() => setAccountDropdown(false)}
-              onSignIn={() => navigate('/auth')}
-            />
+            {user ? (
+              <>
+                <span className="smallText">
+                  Hello, {user.email?.split('@')[0] || 'User'}
+                </span>
+                <span className="boldText">
+                  Account & Lists <ArrowDropDownIcon fontSize="small" />
+                </span>
+                <AccountDropdown
+                  open={accountDropdown}
+                  onClose={() => setAccountDropdown(false)}
+                  onSignIn={() => navigate('/auth')}
+                  user={user}
+                  onSignOut={() => {
+                    dispatch({ type: 'SET_USER', user: null })
+                    setAccountDropdown(false)
+                  }}
+                />
+              </>
+            ) : (
+              <>
+                <span className="smallText">Hello, sign in</span>
+                <span className="boldText">
+                  Account & Lists <ArrowDropDownIcon fontSize="small" />
+                </span>
+                <AccountDropdown
+                  open={accountDropdown}
+                  onClose={() => setAccountDropdown(false)}
+                  onSignIn={() => navigate('/auth')}
+                />
+              </>
+            )}
           </div>
           <div className="headerOrders" onClick={() => navigate('/order')}>
             <span className="smallText">Returns</span>

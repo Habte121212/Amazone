@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import './AccountDropdown.scss'
 import { Link } from 'react-router-dom'
 
-const AccountDropdown = ({ open, onClose, onSignIn }) => {
+const AccountDropdown = ({ open, onClose, onSignIn, user, onSignOut }) => {
   if (!open) return null
   return (
     <div
@@ -14,23 +14,38 @@ const AccountDropdown = ({ open, onClose, onSignIn }) => {
     >
       <div className="accountDropdownCaret" />
       <div className="accountDropdownTop">
-        <button
-          className="accountSignInBtn"
-          onClick={onSignIn}
-          aria-label="Sign in to your account"
-        >
-          Sign in
-        </button>
-        <div className="accountDropdownNewCustomer">
-          New customer?{' '}
-          <a
-            href="https://www.amazon.com/ap/register"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Start here.
-          </a>
-        </div>
+        {user ? (
+          <>
+            <div style={{ fontWeight: 600, marginBottom: 8 }}>{user.email}</div>
+            <button
+              className="accountSignInBtn"
+              onClick={onSignOut}
+              aria-label="Sign out of your account"
+            >
+              Sign out
+            </button>
+          </>
+        ) : (
+          <>
+            <button
+              className="accountSignInBtn"
+              onClick={onSignIn}
+              aria-label="Sign in to your account"
+            >
+              Sign in
+            </button>
+            <div className="accountDropdownNewCustomer">
+              New customer?{' '}
+              <a
+                href="https://www.amazon.com/ap/register"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Start here.
+              </a>
+            </div>
+          </>
+        )}
       </div>
       <div className="accountDropdownColumns">
         <div className="accountDropdownSection">
@@ -61,6 +76,8 @@ AccountDropdown.propTypes = {
   open: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   onSignIn: PropTypes.func,
+  user: PropTypes.object,
+  onSignOut: PropTypes.func,
 }
 
 export default AccountDropdown

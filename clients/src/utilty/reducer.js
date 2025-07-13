@@ -65,7 +65,7 @@ export const reducer = (state, action) => {
     case Type.SET_USER:
       return {
         ...state,
-        user: action.payload,
+        user: action.user,
       }
     case Type.LOGOUT:
       return {
