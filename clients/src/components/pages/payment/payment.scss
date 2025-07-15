@@ -1,3 +1,4 @@
+@use '../../../style.scss' as *;
 .paymentHeader{
   padding: 20px;
   text-align: center;
@@ -11,7 +12,6 @@
   display: flex;
   gap: 20px;
   padding: 20px;
-
 }
 .flex h3{
   min-width: 300px;
@@ -27,6 +27,14 @@ hr{
   height: 100px;
   margin: 0 !important;
   min-height: unset !important;
+
+      @include mobile {
+    height: 60px;
+    min-height: unset !important;
+    margin: 0 !important;
+  
+    
+  }
 }
 .paymentMethod {
   max-width: 350px;
