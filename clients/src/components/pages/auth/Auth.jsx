@@ -9,7 +9,7 @@ import {
   browserSessionPersistence,
 } from 'firebase/auth'
 import { toast } from 'react-toastify'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { DataContext } from '../../DataProvider/DataProvider'
 
 const Auth = () => {
@@ -20,6 +20,7 @@ const Auth = () => {
   const [registerMode, setRegisterMode] = useState(false)
   const [keepSignedIn, setKeepSignedIn] = useState(false)
   const navigate = useNavigate()
+  const naveStateData = useLocation()
 
   const { dispatch } = useContext(DataContext)
 
@@ -47,7 +48,10 @@ const Auth = () => {
           const user = userCredential.user
           toast.success('Signed in successfully!')
           dispatch({ type: 'SET_USER', user })
-          setTimeout(() => navigate('/'), 1200)
+          setTimeout(
+            () => navigate(naveStateData?.state?.redirect || '/'),
+            1200,
+          )
         })
         .catch((error) => {
           if (error.code === 'auth/user-not-found') {
@@ -100,6 +104,44 @@ const Auth = () => {
         <div className="authForm">
           <h2 className="auth-title">
             {registerMode ? 'Create account' : 'Sign-In'}
+            {!registerMode && naveStateData?.state?.msg && (
+              <span
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  fontSize: '0.92rem',
+                  color: '#d32f2f',
+                  fontWeight: 600,
+                  background: 'rgba(211,47,47,0.08)',
+                  borderRadius: '4px',
+                  padding: '3px 10px',
+                  margin: '6px 0',
+                  boxShadow: '0 1px 4px rgba(211,47,47,0.08)',
+                  animation: 'shake 0.4s',
+                }}
+              >
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  style={{ marginRight: 2 }}
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle cx="12" cy="12" r="12" fill="#d32f2f" />
+                  <path
+                    d="M12 7v5"
+                    stroke="#fff"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                  />
+                  <circle cx="12" cy="16" r="1" fill="#fff" />
+                </svg>
+                {naveStateData.state.msg}
+                <style>{`@keyframes shake {0%{transform:translateX(0);}20%{transform:translateX(-3px);}40%{transform:translateX(3px);}60%{transform:translateX(-2px);}80%{transform:translateX(2px);}100%{transform:translateX(0);}}`}</style>
+              </span>
+            )}
           </h2>
           <form className="auth-form" onSubmit={authHandler}>
             <label htmlFor="email">Email or mobile phone number</label>
