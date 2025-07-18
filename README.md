@@ -121,9 +121,10 @@ Amazone/
 
 ### Landing Page
 
-![Landing Page](Amazone/clients/public/landing-screenshot.png)
+![Landing Page](<img width="960" height="482" alt="image" src="https://github.com/user-attachments/assets/d9f7f27c-a407-436f-8c5e-50cc03c536bc" />
+)
 
-> Add more screenshots of your cart, payment, and order pages for visual interest!
+
 
 ---
 
