@@ -129,6 +129,12 @@
     max-width: 100vw !important;
     padding: 0 !important;
   }
+
+  @include tablet {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 32px 24px !important;
+    
+  }
 }
 
 .product_container section {

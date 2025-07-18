@@ -1,4 +1,7 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import Spinner from '../../common/Spinner'
 import './cart.scss'
 import LayOut from '../../LayOut/LayOut'
 import { DataContext } from '../../DataProvider/DataProvider'
@@ -11,6 +14,14 @@ const Cart = () => {
     state: { cart },
     dispatch,
   } = useContext(DataContext)
+  const [loading, setLoading] = useState(true)
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    setLoading(true)
+    const timer = setTimeout(() => setLoading(false), 2000)
+    return () => clearTimeout(timer)
+  }, [])
 
   // Calculate subtotal
   const total = cart.reduce(
@@ -24,7 +35,11 @@ const Cart = () => {
         <div className="cart-left">
           <h2 className="cart-title">Shopping Cart</h2>
           <hr />
-          {cart?.length === 0 ? (
+          {loading ? (
+            <div style={{ textAlign: 'center', margin: '2rem 0' }}>
+              <span className="order-spinner" />
+            </div>
+          ) : cart?.length === 0 ? (
             <p className="cart-empty">Opps! No item in your cart</p>
           ) : (
             <div className="cart-products-list">
@@ -77,9 +92,15 @@ const Cart = () => {
                 <small>This order contains a gift</small>
               </label>
             </span>
-            <Link to="/payment" className="cart-checkout-btn">
+            <button
+              className="cart-checkout-btn"
+              onClick={(e) => {
+                e.preventDefault()
+                navigate('/payment')
+              }}
+            >
               Continue to checkout
-            </Link>
+            </button>
           </div>
         )}
       </section>

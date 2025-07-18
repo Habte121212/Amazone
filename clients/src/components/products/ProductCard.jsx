@@ -32,7 +32,7 @@ const ProductCard = ({
       <Link to={`/product/${id}`}>
         <img src={image || ''} alt={title || 'Product'} />
       </Link>
-      <div>
+      <div className="product-details-mobile">
         <h3>{title || 'No Title'}</h3>
         {renderDesc && (
           <div className="product_description">

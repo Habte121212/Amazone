@@ -1,3 +1,5 @@
+import PersonIcon from '@mui/icons-material/Person'
+import Spinner from '../common/Spinner'
 import React, { useContext, useEffect, useRef } from 'react'
 import SearchIcon from '@mui/icons-material/Search'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
@@ -21,6 +23,8 @@ const SearchInput = () => (
 )
 
 const Header = () => {
+  // Mobile account dropdown toggle
+  const [mobileAccountOpen, setMobileAccountOpen] = React.useState(false)
   const { state, dispatch } = useContext(DataContext)
   const { cart, user } = state
 
@@ -101,52 +105,23 @@ const Header = () => {
   // For country panel
   const handleCountryPanelGo = () => {
     const country = countries.find((c) => c.code === countryPanelSelected)
-    if (country) {
-      setDeliveryCountry(country.code)
-      window.open(
-        `https://www.amazon.${country.code === 'us' ? 'com' : country.code}`,
-        '_blank',
-      )
-      setShowCountryPanel(false)
-    }
   }
 
-  // Accessibility: close on Escape, focus trap, prevent background scroll
-  useEffect(() => {
-    if (showCountryPanel) {
-      // Focus the modal
-      const firstInput = countryModalRef.current?.querySelector(
-        'button, [tabindex]:not([tabindex="-1"])',
-      )
-      firstInput?.focus()
-      // Prevent background scroll
-      document.body.style.overflow = 'hidden'
-      // Escape key closes modal
-      const handleKeyDown = (e) => {
-        if (e.key === 'Escape') setShowCountryPanel(false)
-        // Focus trap
-        if (e.key === 'Tab' && countryModalRef.current) {
-          const focusable = countryModalRef.current.querySelectorAll(
-            'button, [tabindex]:not([tabindex="-1"])',
-          )
-          const first = focusable[0]
-          const last = focusable[focusable.length - 1]
-          if (e.shiftKey && document.activeElement === first) {
-            e.preventDefault()
-            last.focus()
-          } else if (!e.shiftKey && document.activeElement === last) {
-            e.preventDefault()
-            first.focus()
-          }
-        }
-      }
-      window.addEventListener('keydown', handleKeyDown)
-      return () => {
-        window.removeEventListener('keydown', handleKeyDown)
-        document.body.style.overflow = ''
+  // Close mobile account dropdown on outside click
+  React.useEffect(() => {
+    if (!mobileAccountOpen) return
+    const handleClick = (e) => {
+      if (
+        !e.target.closest('.headerMobileAccountToggle') &&
+        !e.target.closest('.accountDropdown')
+      ) {
+        setMobileAccountOpen(false)
       }
     }
-  }, [showCountryPanel])
+    document.addEventListener('mousedown', handleClick)
+    return () => document.removeEventListener('mousedown', handleClick)
+  }, [mobileAccountOpen])
+  // (Removed stray JSX and misplaced code fragments)
 
   // Click outside to close
   const handleOverlayClick = (e) => {
@@ -158,6 +133,60 @@ const Header = () => {
     <>
       <header className="header">
         <div className="headerTop">
+          {/* Mobile account icon toggle (top right) */}
+          <button
+            className="headerMobileAccountToggle"
+            aria-label="Account menu"
+            onClick={() => setMobileAccountOpen((v) => !v)}
+            onMouseEnter={() => setMobileAccountOpen(true)}
+            onMouseLeave={() => setMobileAccountOpen(false)}
+          >
+            <PersonIcon fontSize="large" />
+            {/* Show dropdown or sign in button below icon on mobile */}
+            {mobileAccountOpen && (
+              <div
+                className="accountDropdown"
+                style={{
+                  top: '110%',
+                  right: 0,
+                  left: 'auto',
+                  minWidth: 220,
+                  zIndex: 200,
+                }}
+              >
+                {user ? (
+                  <>
+                    <div className="accountDropdownTop">
+                      <span style={{ fontWeight: 'bold', fontSize: 16 }}>
+                        Hello, {user.email?.split('@')[0] || 'User'}
+                      </span>
+                    </div>
+                    <button
+                      className="accountSignInBtn"
+                      onClick={() => {
+                        dispatch({ type: 'SET_USER', user: null })
+                        setMobileAccountOpen(false)
+                      }}
+                    >
+                      Sign Out
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <button
+                      className="accountSignInBtn"
+                      onClick={() => {
+                        setMobileAccountOpen(false)
+                        navigate('/auth')
+                      }}
+                    >
+                      Sign In
+                    </button>
+                  </>
+                )}
+              </div>
+            )}
+          </button>
           <div className="headerLogo">
             {/* header logo amazone */}
             <Logo onClick={() => navigate('/')} />
@@ -354,7 +383,7 @@ const Header = () => {
             )}
           </div>
           <div
-            className="headerAccount"
+            className="headerAccount headerAccountDesktop"
             onMouseEnter={() => setAccountDropdown(true)}
             onMouseLeave={() => setAccountDropdown(false)}
             tabIndex={0}
@@ -372,16 +401,18 @@ const Header = () => {
                 <span className="boldText">
                   Account & Lists <ArrowDropDownIcon fontSize="small" />
                 </span>
-                <AccountDropdown
-                  open={accountDropdown}
-                  onClose={() => setAccountDropdown(false)}
-                  onSignIn={() => navigate('/auth')}
-                  user={user}
-                  onSignOut={() => {
-                    dispatch({ type: 'SET_USER', user: null })
-                    setAccountDropdown(false)
-                  }}
-                />
+                {accountDropdown && (
+                  <AccountDropdown
+                    open={accountDropdown}
+                    onClose={() => setAccountDropdown(false)}
+                    onSignIn={() => navigate('/auth')}
+                    user={user}
+                    onSignOut={() => {
+                      dispatch({ type: 'SET_USER', user: null })
+                      setAccountDropdown(false)
+                    }}
+                  />
+                )}
               </>
             ) : (
               <>
@@ -389,11 +420,28 @@ const Header = () => {
                 <span className="boldText">
                   Account & Lists <ArrowDropDownIcon fontSize="small" />
                 </span>
-                <AccountDropdown
-                  open={accountDropdown}
-                  onClose={() => setAccountDropdown(false)}
-                  onSignIn={() => navigate('/auth')}
-                />
+                {accountDropdown && (
+                  <div
+                    className="accountDropdown"
+                    style={{
+                      top: '110%',
+                      right: 0,
+                      left: 'auto',
+                      minWidth: 220,
+                      zIndex: 200,
+                    }}
+                  >
+                    <button
+                      className="accountSignInBtn"
+                      onClick={() => {
+                        setAccountDropdown(false)
+                        navigate('/auth')
+                      }}
+                    >
+                      Sign In
+                    </button>
+                  </div>
+                )}
               </>
             )}
           </div>
@@ -401,10 +449,17 @@ const Header = () => {
             <span className="smallText">Returns</span>
             <span className="boldText">& Orders</span>
           </div>
-          <div className="headerCart" onClick={() => navigate('/cart')}>
-            <ShoppingCartIcon />
-            <span className="cartCount">{cart.length}</span>
-            <span className="cartText">Cart</span>
+          <div
+            className="headerCart"
+            onClick={() => {
+              navigate('/cart')
+            }}
+          >
+            <>
+              <ShoppingCartIcon />
+              <span className="cartCount">{cart.length}</span>
+              <span className="cartText">Cart</span>
+            </>
           </div>
         </div>
         <nav className="headerNav">
