@@ -8,6 +8,7 @@ Welcome to **Amazone**, a full-stack, Amazon-inspired e-commerce platform built 
 
 - **Modern UI/UX**: Responsive, clean, and intuitive design inspired by Amazon.
 - **Authentication**: Secure sign-in/register with Firebase Auth.
+- FakeStoreAPI Integration: Products are fetched dynamically for display and detail view.
 - **Product Catalog**: Browse, search, and view product details.
 - **Cart & Checkout**: Add/remove items, adjust quantities, and view cart summary.
 - **Stripe Payments**: Secure payment processing via Stripe.
@@ -121,8 +122,8 @@ Amazone/
 
 ### Landing Page
 
-![Landing Page](<img width="960" height="482" alt="image" src="https://github.com/user-attachments/assets/d9f7f27c-a407-436f-8c5e-50cc03c536bc" />
-)
+![Landing Page]<img width="960" height="482" alt="image" src="https://github.com/user-attachments/assets/f02538b6-2b43-49d0-963f-89f78940d4ff" />
+
 
 
 
