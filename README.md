@@ -123,6 +123,7 @@ Amazone/
 ### Landing Page
 
 [Landing Page]<img width="960" height="482" alt="image" src="https://github.com/user-attachments/assets/f02538b6-2b43-49d0-963f-89f78940d4ff" />
+<br>
 [Ordr page] <img width="960" height="483" alt="image" src="https://github.com/user-attachments/assets/4f4a8b8a-f3b1-4d2c-b631-aede62787cb1" />
 
 
