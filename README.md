@@ -147,8 +147,6 @@ MIT
 ## ✨ Credits
 
 - Inspired by Amazon.com
-- Built by Habte121212 and contributors
-
+- Built by Habtamu Amare 
 ---
 
-Let me know if you want to add more sections, badges, or visuals!
