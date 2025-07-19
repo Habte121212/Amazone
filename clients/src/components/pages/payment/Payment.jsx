@@ -59,10 +59,10 @@ const Payment = () => {
       })
       if (result.error) {
         toast.error(result.error.message)
-      } else if (
-        result.paymentIntent &&
-        result.paymentIntent.status === 'succeeded'
-      ) {
+        setProcessing(false)
+        return
+      }
+      if (result.paymentIntent && result.paymentIntent.status === 'succeeded') {
         toast.success('Payment successful!')
         // Save order to Firestore
         await setDoc(
@@ -76,12 +76,6 @@ const Payment = () => {
             created: result.paymentIntent.created,
           },
         )
-      }
-      // Clear cart after successful order
-      if (result.paymentIntent && result.paymentIntent.status === 'succeeded') {
-        if (typeof dispatch === 'function') {
-          dispatch({ type: 'CLEAR_CART' })
-        }
         if (typeof dispatch === 'function') {
           dispatch({ type: 'CLEAR_CART' })
         }
@@ -89,6 +83,8 @@ const Payment = () => {
         navigate('/order')
         return
       }
+      // If payment not successful, show error
+      toast.error('Payment failed.')
       setProcessing(false)
     } catch (error) {
       toast.error('Payment failed.')
